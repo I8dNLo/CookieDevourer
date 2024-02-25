@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-    max-width: 300px;
+    max-width: 300px; /* Adjust this value to change the maximum width of the container */
 }
 
 h2 {
@@ -20,3 +20,25 @@ ul {
 li {
     margin-bottom: 5px;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Added to fix the table width */
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Added to allow long text to wrap within cells */
+}
+
+.long-text {
+    max-width: 150px; /* Adjust this value to control the maximum width of long text */
+}
+
+/* Add styles for each danger level */
+.minor { color: green; }
+.medium { color: lightyellow; }
+.major { color: red; }

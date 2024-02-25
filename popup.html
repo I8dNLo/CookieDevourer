@@ -6,7 +6,7 @@
     <title>CookieD</title>
     <style>
         body {
-            width: 300px;
+            width: 400px;
             padding: 10px;
         }
         table {
@@ -18,15 +18,21 @@
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+        /* Add background colors for each danger level */
+        .minor { background-color: lightgreen; }
+        .medium { background-color: lightyellow; }
+        .major { background-color: salmon; }
     </style>
 </head>
 <body>
+<h3 id="badCookieScore">Bad Cookie Score: </h3> <!-- Display bad cookie score here -->
 <h2>Cookies for this website:</h2>
 <table id="cookieTable">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Value</th>
+        <th>Cookie Name</th>
+        <th>Cookie Value</th>
+        <th>Danger Level</th>
     </tr>
     </thead>
     <tbody></tbody>
