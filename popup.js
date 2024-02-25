@@ -1,3 +1,24 @@
+// Function to calculate the danger level and value cell content of a cookie
+function calculateCookieInfo(cookieName, cookieValue) {
+    const maxLength = 15;
+    var dangerLevel;
+    var valueCellContent;
+
+    // Calculate danger level
+    if (cookieValue.length > 10) {
+        dangerLevel = 'major';
+    } else if (cookieValue.length > 5) {
+        dangerLevel = 'medium';
+    } else {
+        dangerLevel = 'minor';
+    }
+
+    // Calculate content for value cell
+    valueCellContent = cookieValue.length > maxLength ? cookieValue.slice(0, maxLength) + "..." : cookieValue;
+
+    return { dangerLevel: dangerLevel, valueCellContent: valueCellContent };
+}
+
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.cookies.getAll({ url: tabs[0].url }, function (cookies) {
         var cookieTable = document.getElementById('cookieTable').getElementsByTagName('tbody')[0];
@@ -8,27 +29,26 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             var nameCell = row.insertCell(0);
             var valueCell = row.insertCell(1);
             var dangerCell = row.insertCell(2); // New cell for danger level
-            var length_congst = 15;
 
-            // Randomly assign danger level
-            var dangerLevels = ['minor', 'medium', 'major'];
-            var randomIndex = Math.floor(Math.random() * dangerLevels.length);
-            var dangerLevel = dangerLevels[randomIndex];
+            // Calculate cookie info
+            var cookieInfo = calculateCookieInfo(cookie.name, cookie.value);
 
-            // Set text content for name and value cells
-            nameCell.textContent = (cookie.name.length > length_congst) ? cookie.name.slice(0, length_congst) + "..." : cookie.name;
-            valueCell.textContent = (cookie.value.length > length_congst) ? cookie.value.slice(0, length_congst) + "..." : cookie.value;
+            // Set text content for name cell
+            nameCell.textContent = cookieInfo.valueCellContent;
+
+            // Set text content for value cell
+            valueCell.textContent = cookieInfo.valueCellContent;
 
             // Set text content and style for danger cell
-            dangerCell.textContent = dangerLevel;
-            dangerCell.classList.add(dangerLevel);
+            dangerCell.textContent = cookieInfo.dangerLevel;
+            dangerCell.classList.add(cookieInfo.dangerLevel);
 
             // Calculate bad cookie score
-            if (dangerLevel === 'medium') {
+            if (cookieInfo.dangerLevel === 'medium') {
                 badCookieScore += 1;
-            } else if (dangerLevel === 'minor') {
+            } else if (cookieInfo.dangerLevel === 'minor') {
                 badCookieScore += 0.5;
-            } else if (dangerLevel === 'major') {
+            } else if (cookieInfo.dangerLevel === 'major') {
                 badCookieScore += 2;
             }
         });
