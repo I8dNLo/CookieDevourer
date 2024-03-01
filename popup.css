@@ -1,11 +1,47 @@
 body {
     font-family: Arial, sans-serif;
+    padding: 10px;
+    margin: 0;
+    width: 400px; /* Adjust the width as necessary */
+}
+
+.scrollContainer {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.safe { background-color: lightgreen; }
+.moderate { background-color: lightyellow; }
+.Severe { background-color: salmon; }
+
+
+
+
+/* 
+body {
+    font-family: Arial, sans-serif;
     padding: 20px;
     margin: 0;
 }
 
 .container {
     max-width: 300px;
+}
+
+.scrollContainer {
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 h2 {
@@ -20,3 +56,24 @@ ul {
 li {
     margin-bottom: 5px;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+.long-text {
+    max-width: 150px;
+}
+
+.minor { background-color: lightgreen; }
+.medium { background-color: lightyellow; }
+.major { background-color: salmon; } */
